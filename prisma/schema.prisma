@@ -12,24 +12,26 @@ datasource db {
 
 model User {
   id      Int     @id @default(autoincrement())
-  name    String
+  name    String?
   address String  @db.Char(42)
   Space   Space[]
 }
 
 model Space {
-  id     Int     @id @default(autoincrement())
-  userId Int
-  owner  User    @relation(fields: [userId], references: [id])
-  events Event[]
+  id       Int     @id @default(autoincrement())
+  userId   Int
+  location String
+  name     String
+  owner    User    @relation(fields: [userId], references: [id])
+  events   Event[]
 }
 
 model Event {
   id          Int      @id @default(autoincrement())
   name        String
-  description String
-  location    String
-  date        DateTime
+  description String?
+  location    String?
+  date        DateTime?
   spaceId     Int
   space       Space    @relation(fields: [spaceId], references: [id])
 }

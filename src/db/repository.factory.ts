@@ -14,7 +14,7 @@ export class RepositoryFactory {
       this._instance = new RepositoryFactory();
     }
 
-    return new RepositoryFactory();
+    return this._instance;
   }
 
   public getEventsRepository(): EventsRepository {

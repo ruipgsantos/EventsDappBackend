@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { Executor, getExecutor } from "./prisma";
+import { getExecutor } from "./prisma";
 import { Event } from "@prisma/client";
 
 export class EventsRepository {
@@ -12,18 +12,25 @@ export class EventsRepository {
 
   public async getEvents() {
     const executor = await getExecutor<Event[]>(this._prismaClient);
-    return await executor(async (): Promise<Event[]> => {
-      return await this._prismaClient.event.findMany();
+    return await executor(async (prisma: PrismaClient): Promise<Event[]> => {
+      return await prisma.event.findMany({
+        include: { space: true },
+        orderBy: { date: "desc" },
+      });
     });
   }
 
   public async getEventsBySpaceId(spaceId: number): Promise<Event[]> {
     const executor = await getExecutor<Event[]>(this._prismaClient);
-    const eventsRes = await executor(async (): Promise<Event[]> => {
-      return await this._prismaClient.event.findMany({
-        where: { spaceId: { equals: 1 } },
-      });
-    });
+    const eventsRes = await executor(
+      async (prisma: PrismaClient): Promise<Event[]> => {
+        return await prisma.event.findMany({
+          where: { spaceId: { equals: spaceId } },
+          include: { space: true },
+          orderBy: { date: "desc" },
+        });
+      }
+    );
 
     return eventsRes;
   }

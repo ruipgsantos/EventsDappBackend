@@ -7,8 +7,13 @@
     "build": "tsc",
     "start": "tsc & node .",
     "dev": "nodemon index.ts",
-    "reset": "del -rf ./prisma/migrations/* && npx prisma migrate dev --name init",
-    "test": "del /S prisma\\migrations"
+    "reset-prisma": "npx prisma migrate dev reset --force",
+    "reset-migs": "prisma migrate dev --name init",
+    "insert-data-prisma": "node ./test/insert_test_data.js",
+    "mig-delete": "rmdir /s /q prisma\\migrations",
+    "insert-data": "sh ./test/insert_test_data.sh",
+    "insert-data2": "psql -f ./test/data.sql postgresql://postgres:postgres@localhost:5432/postgres",
+    "reset-db": "npm run mig-delete && npm run reset-migs && npm run insert-data2"
   },
   "dependencies": {
     "@prisma/client": "^4.6.0",

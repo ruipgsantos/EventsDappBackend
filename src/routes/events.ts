@@ -22,15 +22,12 @@ type SpaceParams = {
 
 router.get(
   "/:spaceId",
-  async (
-    req: Request<{ spaceId: number }, { events: Event[] }, {}, SpaceParams>,
-    res
-  ) => {
+  async (req: Request<{ spaceId: number }, Event[], {}, SpaceParams>, res) => {
     const params: SpaceParams = req.params;
     const eventsRepo = await getEventsRepo();
-    const events = await eventsRepo.getEventsBySpaceId(params.spaceId);
+    const events = await eventsRepo.getEventsBySpaceId(Number(params.spaceId));
     console.log(`request events by spaceid at ${Date.now()}`);
-    res.send({ events });
+    res.send(events);
   }
 );
 
