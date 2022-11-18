@@ -1,8 +1,8 @@
-import { PrismaClient } from "@prisma/client";
 import { getExecutor } from "./prisma";
 import { Event } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 
-export class EventsRepository {
+export default class EventsRepository {
   private _prismaClient: PrismaClient;
   // private _executor: Executor<Event>;
 
@@ -10,7 +10,7 @@ export class EventsRepository {
     this._prismaClient = prismaClient;
   }
 
-  public async getEvents() {
+  public async getEvents(): Promise<Event[]> {
     const executor = await getExecutor<Event[]>(this._prismaClient);
     return await executor(async (prisma: PrismaClient): Promise<Event[]> => {
       return await prisma.event.findMany({

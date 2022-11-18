@@ -1,0 +1,142 @@
+[
+  {
+    "id": 7,
+    "name": "Movie Night",
+    "description": "Showing \"The Fall\" on open air cinema",
+    "location": "Serra do Pilar Gaia",
+    "date": "2022-11-22T21:00:00.000Z",
+    "spaceId": 5,
+    "space": {
+      "id": 5,
+      "userId": 5,
+      "location": "Avenida dos Combatentes 100 Porto",
+      "name": "The House"
+    }
+  },
+  {
+    "id": 3,
+    "name": "Stone Gate",
+    "description": "Stoner Rock mini-festival, bring friends and prepare your necks.",
+    "location": "PraÃ§a dos Loios Porto",
+    "date": "2022-11-21T22:00:00.000Z",
+    "spaceId": 2,
+    "space": {
+      "id": 2,
+      "userId": 2,
+      "location": "Rua do Sol 110 Porto",
+      "name": "SunO Hum"
+    }
+  },
+  {
+    "id": 4,
+    "name": "Drop Dead",
+    "description": "Punk Night!! ",
+    "location": null,
+    "date": "2022-11-17T23:00:00.000Z",
+    "spaceId": 2,
+    "space": {
+      "id": 2,
+      "userId": 2,
+      "location": "Rua do Sol 110 Porto",
+      "name": "SunO Hum"
+    }
+  },
+  {
+    "id": 5,
+    "name": "Jazz Sessions 5",
+    "description": "Grab a Drink. Molano Trio, Justin Joler and The Konkers",
+    "location": null,
+    "date": "2022-11-16T22:00:00.000Z",
+    "spaceId": 4,
+    "space": {
+      "id": 4,
+      "userId": 4,
+      "location": "Avenida dos Aliados 67 Porto",
+      "name": "The Locust"
+    }
+  },
+  {
+    "id": 8,
+    "name": "Movie Night",
+    "description": "Showing \"Goodfellas\"",
+    "location": null,
+    "date": "2022-11-16T21:00:00.000Z",
+    "spaceId": 5,
+    "space": {
+      "id": 5,
+      "userId": 5,
+      "location": "Avenida dos Combatentes 100 Porto",
+      "name": "The House"
+    }
+  },
+  {
+    "id": 1,
+    "name": "It comes!",
+    "description": "Another fine edition of \"It Comes!\". Spooky drinks and the skeleton inside everyone hittin' bones on the dance floor on the best non-Halloween creepy party of all.",
+    "location": null,
+    "date": "2022-11-16T21:00:00.000Z",
+    "spaceId": 1,
+    "space": {
+      "id": 1,
+      "userId": 1,
+      "location": "Rua Martires da Liberdade 25 Porto",
+      "name": "Martyr"
+    }
+  },
+  {
+    "id": 9,
+    "name": "Movie Night",
+    "description": "Showing \"Primer\"",
+    "location": null,
+    "date": "2022-11-16T20:59:56.000Z",
+    "spaceId": 5,
+    "space": {
+      "id": 5,
+      "userId": 5,
+      "location": "Avenida dos Combatentes 100 Porto",
+      "name": "The House"
+    }
+  },
+  {
+    "id": 10,
+    "name": "Movie Night",
+    "description": "Showing \"Hana Bi\"",
+    "location": null,
+    "date": "2022-11-16T20:59:45.000Z",
+    "spaceId": 5,
+    "space": {
+      "id": 5,
+      "userId": 5,
+      "location": "Avenida dos Combatentes 100 Porto",
+      "name": "The House"
+    }
+  },
+  {
+    "id": 2,
+    "name": "Cook With Us",
+    "description": "Come learn some healthy breakfast recipes with us on a vegan inclusive cooking workshop.",
+    "location": null,
+    "date": "2022-11-16T11:00:00.000Z",
+    "spaceId": 3,
+    "space": {
+      "id": 3,
+      "userId": 3,
+      "location": "Rua Fernandes de Freitas 521 Porto",
+      "name": "Fried Eggs"
+    }
+  },
+  {
+    "id": 6,
+    "name": "Jazz Sessions 4",
+    "description": "Free Jam night with the Locust Band",
+    "location": null,
+    "date": "2022-11-11T22:00:00.000Z",
+    "spaceId": 4,
+    "space": {
+      "id": 4,
+      "userId": 4,
+      "location": "Avenida dos Aliados 67 Porto",
+      "name": "The Locust"
+    }
+  }
+]

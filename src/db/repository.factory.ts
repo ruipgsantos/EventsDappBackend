@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { EventsRepository } from "./repositories/events.repository";
+import EventsRepository from "./repositories/events.repository";
 
 export class RepositoryFactory {
   private _prismaClient: PrismaClient;

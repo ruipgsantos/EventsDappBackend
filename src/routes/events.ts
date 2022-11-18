@@ -1,5 +1,5 @@
 import express, { Request, Response, NextFunction } from "express";
-import { EventsRepository } from "../db/repositories/events.repository";
+import EventsRepository from "../db/repositories/events.repository";
 import { RepositoryFactory } from "../db/repository.factory";
 import { Event } from "@prisma/client";
 
@@ -20,15 +20,13 @@ type SpaceParams = {
   spaceId: number;
 };
 
-router.get(
-  "/:spaceId",
-  async (req: Request<{ spaceId: number }, Event[], {}, SpaceParams>, res) => {
-    
-    const eventsRepo = await getEventsRepo();
-    const events = await eventsRepo.getEventsBySpaceId(Number(req.params.spaceId));
-    console.log(`request events by spaceid at ${Date.now()}`);
-    res.send(events);
-  }
-);
+router.get("/:spaceId", async (req: Request<SpaceParams, Event[]>, res) => {
+  const eventsRepo = await getEventsRepo();
+  const events = await eventsRepo.getEventsBySpaceId(
+    Number(req.params.spaceId)
+  );
+  console.log(`request events by spaceid at ${Date.now()}`);
+  res.send(events);
+});
 
 export default router;
