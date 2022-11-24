@@ -20,6 +20,10 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
+    - name: Create .env file
+      uses: SpicyPizza/create-envfile@v1.3.0
+      with:
+        COOKIE_SECRET: "b6fe3b29-afb9-46c2-9983-385786e064b6"
     - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
