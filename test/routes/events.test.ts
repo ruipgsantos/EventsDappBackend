@@ -5,6 +5,7 @@ import { Event } from "@prisma/client";
 
 import EventsRepository from "../../src/db/repositories/events.repository";
 
+//TODO: error scenarios
 describe("Events Routes", () => {
   let mockEventsData: Event[] = loadEventsData();
 
@@ -27,6 +28,7 @@ describe("Events Routes", () => {
 
     await request(app)
       .get("/events")
+      .expect(200)
       .then((response) => expect(response.body).toEqual(mockEventsData));
 
     expect(getEventsSpy).toHaveBeenCalledTimes(1);
@@ -47,6 +49,7 @@ describe("Events Routes", () => {
 
     await request(app)
       .get(`/events/${spaceId}`)
+      .expect(200)
       .then((response) => expect(response.body).toEqual(expectedResult));
 
     expect(getEventsBySpaceIdSpy).toHaveBeenCalledTimes(1);

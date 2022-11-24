@@ -1,4 +1,4 @@
-import express, { Request, Response, NextFunction } from "express";
+import express, { Request, Response } from "express";
 import EventsRepository from "../db/repositories/events.repository";
 import { RepositoryFactory } from "../db/repository.factory";
 import { Event } from "@prisma/client";
@@ -12,7 +12,10 @@ const getEventsRepo = async (): Promise<EventsRepository> => {
 router.get("/", async (req: Request, res: Response) => {
   const eventsRepo = await getEventsRepo();
   const events = await eventsRepo.getEvents();
-  console.log(`request events at ${Date.now()}`);
+
+  console.log(
+    `requested ${events ? events.length : 0} events at ${Date.now()}`
+  );
   res.send(events);
 });
 
@@ -25,7 +28,9 @@ router.get("/:spaceId", async (req: Request<SpaceParams, Event[]>, res) => {
   const events = await eventsRepo.getEventsBySpaceId(
     Number(req.params.spaceId)
   );
-  console.log(`request events by spaceid at ${Date.now()}`);
+  console.log(
+    `requested ${events ? events.length : 0} events by spaceid at ${Date.now()}`
+  );
   res.send(events);
 });
 
