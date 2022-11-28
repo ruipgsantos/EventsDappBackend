@@ -9,6 +9,9 @@ const getEventsRepo = async (): Promise<EventsRepository> => {
   return (await RepositoryFactory.getInstance()).getEventsRepository();
 };
 
+/**
+ * Get All Events
+ */
 router.get("/", async (req: Request, res: Response) => {
   const eventsRepo = await getEventsRepo();
   const events = await eventsRepo.getEvents();
@@ -23,6 +26,9 @@ type SpaceParams = {
   spaceId: number;
 };
 
+/**
+ * Get Events By Space Id
+ */
 router.get("/:spaceId", async (req: Request<SpaceParams, Event[]>, res) => {
   const eventsRepo = await getEventsRepo();
   const events = await eventsRepo.getEventsBySpaceId(
@@ -32,6 +38,13 @@ router.get("/:spaceId", async (req: Request<SpaceParams, Event[]>, res) => {
     `requested ${events ? events.length : 0} events by spaceid at ${Date.now()}`
   );
   res.send(events);
+});
+
+router.post("/", async (req: Request<{}, {}, Event>, res: Response) => {
+  const eventRepo = await getEventsRepo();
+  const resEvent = await eventRepo.saveEvent(req.body);
+
+  res.send(resEvent);
 });
 
 export default router;

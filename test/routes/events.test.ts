@@ -54,4 +54,35 @@ describe("Events Routes", () => {
 
     expect(getEventsBySpaceIdSpy).toHaveBeenCalledTimes(1);
   });
+
+  it("Returns created Event", async () => {
+    const newEvent = {
+      name: "newName",
+      description: "newDescription",
+      date: new Date(Date.now()),
+      location: "newLocation",
+      spaceId: 1,
+    };
+
+    const saveEventSpy = jest
+      .spyOn(EventsRepository.prototype, "saveEvent")
+      .mockImplementation((): Promise<Event> => {
+        return new Promise<Event>((res) => {
+          return res({ id: 1000, ...newEvent });
+        });
+      });
+
+    await request(app)
+      .post(`/events`)
+      .expect(200)
+      .then((response) =>
+        expect(response.body).toEqual({
+          ...newEvent,
+          date: newEvent.date.toISOString(),
+          id: 1000,
+        })
+      );
+
+    expect(saveEventSpy).toHaveBeenCalledTimes(1);
+  });
 });
