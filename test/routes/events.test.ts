@@ -3,7 +3,7 @@ import app from "../../src/app";
 import { loadEventsData } from "../testutils";
 import { Event } from "@prisma/client";
 
-import EventsRepository from "../../src/db/repositories/events.repository";
+import EventRepository from "../../src/db/repositories/event.repository";
 
 //TODO: error scenarios
 describe("Events Routes", () => {
@@ -19,7 +19,7 @@ describe("Events Routes", () => {
 
   it("Returns events array", async () => {
     const getEventsSpy = jest
-      .spyOn(EventsRepository.prototype, "getEvents")
+      .spyOn(EventRepository.prototype, "getEvents")
       .mockImplementation((): Promise<Event[]> => {
         return new Promise<Event[]>((res) => {
           return res(mockEventsData);
@@ -40,7 +40,7 @@ describe("Events Routes", () => {
       return e.spaceId === spaceId;
     });
     const getEventsBySpaceIdSpy = jest
-      .spyOn(EventsRepository.prototype, "getEventsBySpaceId")
+      .spyOn(EventRepository.prototype, "getEventsBySpaceId")
       .mockImplementation((): Promise<Event[]> => {
         return new Promise<Event[]>((res) => {
           return res(expectedResult);
@@ -65,7 +65,7 @@ describe("Events Routes", () => {
     };
 
     const saveEventSpy = jest
-      .spyOn(EventsRepository.prototype, "saveEvent")
+      .spyOn(EventRepository.prototype, "saveEvent")
       .mockImplementation((): Promise<Event> => {
         return new Promise<Event>((res) => {
           return res({ id: 1000, ...newEvent });

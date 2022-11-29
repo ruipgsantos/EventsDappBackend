@@ -1,7 +1,9 @@
 import { PrismaClient } from "@prisma/client";
-import EventsRepository from "./repositories/events.repository";
+import EventRepository from "./repositories/event.repository";
+import SpaceRepository from "./repositories/space.repository";
+import UserRepository from "./repositories/user.repository";
 
-export class RepositoryFactory {
+export default class RepositoryFactory {
   private _prismaClient: PrismaClient;
   private static _instance: RepositoryFactory;
 
@@ -17,7 +19,14 @@ export class RepositoryFactory {
     return this._instance;
   }
 
-  public getEventsRepository(): EventsRepository {
-    return new EventsRepository(this._prismaClient);
+  public getEventRepository(): EventRepository {
+    return new EventRepository(this._prismaClient);
+  }
+
+  public getSpaceRepository(): SpaceRepository {
+    return new SpaceRepository(this._prismaClient);
+  }
+  public getUserRepository(): UserRepository {
+    return new UserRepository(this._prismaClient);
   }
 }

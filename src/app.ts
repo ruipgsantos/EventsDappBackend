@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import eventsRouter from "./routes/events";
+import spacesRouter from "./routes/spaces";
 import authRouter from "./routes/auth";
 import session from "express-session";
 import { v4 as uuidv4 } from "uuid";
@@ -27,7 +28,7 @@ app.use(
     saveUninitialized: true,
     cookie: {
       secure: false,
-      maxAge: 1000 * 60 * 60,      
+      maxAge: 1000 * 60 * 60,
     },
   })
 );
@@ -35,6 +36,7 @@ app.use(
 app.use(express.json());
 
 app.use("/events", eventsRouter);
+app.use("/spaces", spacesRouter);
 app.use("/auth", authRouter);
 
 export default app;

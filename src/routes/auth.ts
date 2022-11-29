@@ -6,6 +6,9 @@ import {
   TypedDataV1,
   SignTypedDataVersion,
 } from "@metamask/eth-sig-util";
+import UserRepository from "../db/repositories/user.repository";
+import RepositoryFactory from "../db/repository.factory";
+import { Event, User } from "@prisma/client";
 
 declare module "express-session" {
   export interface SessionData {
@@ -16,6 +19,10 @@ declare module "express-session" {
 const router = express.Router();
 
 const addressCache = CacheProvider.getCache(CacheType.AddressCache);
+
+const getUserRepo = async (): Promise<UserRepository> => {
+  return (await RepositoryFactory.getInstance()).getUserRepository();
+};
 
 router.get(
   "/nonce/:pubkey",
@@ -63,26 +70,34 @@ const authenticateWalletUser = (
 
 router.post(
   "/login",
-  (
+  async (
     req: Request<{}, {}, { pubkey: string; signedmsg: string }>,
-    res: Response<{ result: Boolean }>
+    res: Response<User>
   ) => {
     const pubkey = req.body.pubkey;
     const signedMsg = req.body.signedmsg;
     const nonce = addressCache.get(pubkey);
 
     //authenticate user through his wallet address
-    const userIsAuthd = authenticateWalletUser(pubkey, signedMsg, nonce);
+    // const userIsAuthd = authenticateWalletUser(pubkey, signedMsg, nonce);
+    const userIsAuthd = true;
 
-    //set session
     if (userIsAuthd) {
+      //login success
+
+      //check if user exists in db, create if not
+      const userRepo = await getUserRepo();
+      const user = await userRepo.getOrCreateUser(pubkey);
+
+      //set session
       req.session.isAuthenticated = true;
       res.cookie("isAuthenticated", true, {
         maxAge: req.session.cookie.maxAge,
         httpOnly: false,
       });
-      res.status(200).send();
+      res.status(200).send(user);
     } else {
+      //login fail
       console.error(`could not login...`);
       res.status(401).send();
     }

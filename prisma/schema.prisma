@@ -13,25 +13,26 @@ datasource db {
 model User {
   id      Int     @id @default(autoincrement())
   name    String?
-  address String  @db.Char(42)
+  address String  @unique @db.Char(42)
   Space   Space[]
 }
 
 model Space {
   id       Int     @id @default(autoincrement())
   userId   Int
-  location String
-  name     String
+  location String  @default("")
+  name     String  @default("")
   owner    User    @relation(fields: [userId], references: [id])
   events   Event[]
+  active   Boolean @default(false)
 }
 
 model Event {
-  id          Int      @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   name        String
   description String?
   location    String?
   date        DateTime?
   spaceId     Int
-  space       Space    @relation(fields: [spaceId], references: [id])
+  space       Space     @relation(fields: [spaceId], references: [id])
 }

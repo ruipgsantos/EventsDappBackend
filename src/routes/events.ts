@@ -1,12 +1,12 @@
 import express, { Request, Response } from "express";
-import EventsRepository from "../db/repositories/events.repository";
-import { RepositoryFactory } from "../db/repository.factory";
+import EventRepository from "../db/repositories/event.repository";
+import RepositoryFactory from "../db/repository.factory";
 import { Event } from "@prisma/client";
 
 const router = express.Router();
 
-const getEventsRepo = async (): Promise<EventsRepository> => {
-  return (await RepositoryFactory.getInstance()).getEventsRepository();
+const getEventsRepo = async (): Promise<EventRepository> => {
+  return (await RepositoryFactory.getInstance()).getEventRepository();
 };
 
 /**

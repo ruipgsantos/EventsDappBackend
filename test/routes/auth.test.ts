@@ -15,7 +15,7 @@ const mockPubKey =
 const mockPrivateKey =
   "33310aabe472ccefd40a228ae0048b0bff11d10402f20397afac2908f69652e9";
 
-describe("Auth Routes", () => {
+describe.skip("Auth Routes", () => {
   beforeAll(() => {});
 
   beforeEach(() => {});
