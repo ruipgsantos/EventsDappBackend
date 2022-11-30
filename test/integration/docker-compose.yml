@@ -1,0 +1,9 @@
+services:
+  db:
+    image: "bitnami/postgresql"
+    tty: true
+    environment:
+      POSTGRES_PASSWORD: postgres
+
+    ports:
+      - "127.0.0.1:5555:5555"

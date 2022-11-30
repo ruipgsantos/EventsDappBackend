@@ -1,0 +1,7 @@
+{
+    "preset": "ts-jest",
+    "displayName": "UnitTests",
+    "testMatch": [
+        "<rootDir>/**/*.test.ts"
+    ]
+}
