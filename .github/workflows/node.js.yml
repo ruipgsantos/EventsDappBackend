@@ -36,8 +36,5 @@ jobs:
     - uses: cardinalby/export-env-action@v1      
       with:
         envFile: './src/test/integration/.env'
-    - name: Run Integration Tests
-      uses: cardinalby/export-env-action@v1      
-      with:
-        envFile: './src/test/integration/.env'
+    - name: Run Integration Tests      
       run: npm run integration-test --if-present
