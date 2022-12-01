@@ -1,7 +1,7 @@
 const NodeEnvironment = require("jest-environment-node").TestEnvironment;
 const execSync = require("child_process").execSync;
 const path = require("path");
-require("dotenv").config({ path: path.join(__dirname, ".env") });
+require("dotenv").config({ path: path.join(__dirname, "integration.env") });
 
 class CustomEnvironment extends NodeEnvironment {
   constructor(config) {
