@@ -4,5 +4,5 @@
     "testMatch": [
         "<rootDir>/**/*.integration.test.ts"
     ],
-    "testEnvironment": "<rootDir>/env.integration.ts"
+    "testEnvironment": "<rootDir>/env.integration"
 }
