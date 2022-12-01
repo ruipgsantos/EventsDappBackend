@@ -1,5 +1,5 @@
 import request from "supertest";
-import app from "../../src/app";
+import app from "../../../src/app";
 import {
   signTypedData,
   SignTypedDataVersion,
@@ -7,7 +7,7 @@ import {
 } from "@metamask/eth-sig-util";
 import { Response } from "express";
 import { v4 as uuidv4 } from "uuid";
-import { CacheProvider, CacheType } from "../../src/cache/cache.provider";
+import { CacheProvider, CacheType } from "../../../src/cache/cache.provider";
 
 const mockEthAdress = "0x62F87Ba3C0D00d1a6F0533d0309DB3720FF8AfFf";
 const mockPubKey =
@@ -52,7 +52,7 @@ describe.skip("Auth Routes", () => {
       .post(`/auth/login`)
       .send({ pubkey: mockEthAdress, signedmsg: signedMsg })
       .expect(200)
-      .then((response: Response) => {
+      .then((response) => {
         expect(response.header["set-cookie"][0]).toContain(
           "isAuthenticated=true;"
         );

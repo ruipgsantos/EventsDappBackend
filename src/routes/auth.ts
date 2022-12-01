@@ -1,14 +1,7 @@
 import express, { Request, Response } from "express";
 import { CacheProvider, CacheType } from "../../src/cache/cache.provider";
 import { v4 as uuidv4 } from "uuid";
-import {
-  recoverTypedSignature,
-  TypedDataV1,
-  SignTypedDataVersion,
-} from "@metamask/eth-sig-util";
-import UserRepository from "../db/repositories/user.repository";
-import RepositoryFactory from "../db/repository.factory";
-import { Event, User } from "@prisma/client";
+import { authenticateWalletUser } from "../utils/eth";
 
 declare module "express-session" {
   export interface SessionData {
@@ -33,41 +26,6 @@ router.get(
   }
 );
 
-/**
- * Checks if user is authenticated by recovering the public key from the signed message and comparing to the provided key
- *
- * @param publicKey
- * @param signedMessage
- * @param nonce
- * @returns
- */
-const authenticateWalletUser = (
-  publicKey: string,
-  signedMessage: string,
-  nonce: string
-) => {
-  const datav1: TypedDataV1 = [
-    {
-      type: "string",
-      name: "nonce",
-      value: nonce,
-    },
-  ];
-
-  try {
-    const recoveredAdress = recoverTypedSignature({
-      data: datav1,
-      signature: signedMessage,
-      version: SignTypedDataVersion.V1,
-    });
-
-    return recoveredAdress.toUpperCase() === publicKey.toUpperCase();
-  } catch (err) {
-    console.error(err);
-    return false;
-  }
-};
-
 router.post(
   "/login",
   async (
@@ -83,14 +41,6 @@ router.post(
     const userIsAuthd = true;
 
     if (userIsAuthd) {
-      //login success
-
-      //check if user exists in db, create if not
-      const userRepo = await getUserRepo();
-      const user = await userRepo.getOrCreateUser(pubkey);
-
-      //set session
-      req.session.isAuthenticated = true;
       res.cookie("isAuthenticated", true, {
         maxAge: req.session.cookie.maxAge,
         httpOnly: false,

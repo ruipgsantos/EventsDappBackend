@@ -1,9 +1,9 @@
 import request from "supertest";
-import app from "../../src/app";
-import { loadEventsData } from "../testutils";
+import app from "../../../src/app";
+import { loadEventsData } from "../../testutils";
 import { Event } from "@prisma/client";
 
-import EventRepository from "../../src/db/repositories/event.repository";
+import EventsRepository from "../../../src/db/repositories/events.repository";
 
 //TODO: error scenarios
 describe("Events Routes", () => {
