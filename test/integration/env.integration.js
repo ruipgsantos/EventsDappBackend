@@ -16,10 +16,7 @@ class CustomEnvironment extends NodeEnvironment {
         execSync(
           "docker-compose -f ./test/integration/docker-compose.yml up -d"
         );
-        execSync("npx prisma migrate reset --force");
-        // execSync(
-        //   "psql -f ./data.sql postgresql://postgres:postgres@localhost:5555/postgres"
-        // );
+        execSync("npx prisma migrate dev --name init");        
         console.info("Containers initialized...");
         success();
       } catch (err) {
