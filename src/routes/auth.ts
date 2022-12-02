@@ -2,6 +2,9 @@ import express, { Request, Response } from "express";
 import { CacheProvider, CacheType } from "../../src/cache/cache.provider";
 import { v4 as uuidv4 } from "uuid";
 import { authenticateWalletUser } from "../utils/eth";
+import UserRepository from "../db/repositories/user.repository";
+import RepositoryFactory from "../db/repository.factory";
+import { User } from "@prisma/client";
 
 declare module "express-session" {
   export interface SessionData {
@@ -37,14 +40,17 @@ router.post(
     const nonce = addressCache.get(pubkey);
 
     //authenticate user through his wallet address
-    // const userIsAuthd = authenticateWalletUser(pubkey, signedMsg, nonce);
-    const userIsAuthd = true;
+    const userIsAuthd = authenticateWalletUser(pubkey, signedMsg, nonce);
+    // const userIsAuthd = true;
 
     if (userIsAuthd) {
       res.cookie("isAuthenticated", true, {
         maxAge: req.session.cookie.maxAge,
         httpOnly: false,
       });
+
+      const user = await (await getUserRepo()).getOrCreateUser(pubkey);
+
       res.status(200).send(user);
     } else {
       //login fail

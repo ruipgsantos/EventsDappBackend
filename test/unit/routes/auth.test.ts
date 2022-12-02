@@ -8,6 +8,8 @@ import {
 import { Response } from "express";
 import { v4 as uuidv4 } from "uuid";
 import { CacheProvider, CacheType } from "../../../src/cache/cache.provider";
+import { User } from "@prisma/client";
+import UserRepository from "../../../src/db/repositories/user.repository";
 
 const mockEthAdress = "0x62F87Ba3C0D00d1a6F0533d0309DB3720FF8AfFf";
 const mockPubKey =
@@ -15,7 +17,7 @@ const mockPubKey =
 const mockPrivateKey =
   "33310aabe472ccefd40a228ae0048b0bff11d10402f20397afac2908f69652e9";
 
-describe.skip("Auth Routes", () => {
+describe("Auth Routes", () => {
   beforeAll(() => {});
 
   beforeEach(() => {});
@@ -30,7 +32,7 @@ describe.skip("Auth Routes", () => {
       });
   });
 
-  it("Should return authentication cookie after challenge", async () => {
+  it("Should return user and authentication cookie after challenge", async () => {
     const nonce = uuidv4();
     CacheProvider.getCache(CacheType.AddressCache).set(mockEthAdress, nonce);
 
@@ -48,6 +50,20 @@ describe.skip("Auth Routes", () => {
       version: SignTypedDataVersion.V1,
     });
 
+    const user = {
+      id: 1,
+      address: mockEthAdress,
+      name: "user1",
+    };
+
+    const getOrCreateUserSpy = jest
+      .spyOn(UserRepository.prototype, "getOrCreateUser")
+      .mockImplementation((): Promise<User> => {
+        return new Promise<User>((res) => {
+          return res(user);
+        });
+      });
+
     await request(app)
       .post(`/auth/login`)
       .send({ pubkey: mockEthAdress, signedmsg: signedMsg })
@@ -56,7 +72,11 @@ describe.skip("Auth Routes", () => {
         expect(response.header["set-cookie"][0]).toContain(
           "isAuthenticated=true;"
         );
+
+        expect(response.body).toEqual(user);
       });
+
+    expect(getOrCreateUserSpy).toBeCalledTimes(1);
   });
 
   it("Should return 401 for failed authentication", async () => {

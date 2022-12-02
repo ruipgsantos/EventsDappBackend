@@ -1,11 +1,11 @@
 import request from "supertest";
-import app from "../../src/app";
-import { loadEventsData } from "../testutils";
+import app from "../../../src/app";
+import { loadEventsData } from "../../testutils";
 import { Event } from "@prisma/client";
-import DbContainer from "./db.container";
+import DbContainer from "../db.container";
 
-import EventRepository from "../../src/db/repositories/events.repository";
-import { RepositoryFactory } from "../../src/db/repository.factory";
+import EventRepository from "../../../src/db/repositories/event.repository";
+import RepositoryFactory from "../../../src/db/repository.factory";
 import e from "express";
 
 //TODO: error scenarios
@@ -16,7 +16,7 @@ describe("Events Routes", () => {
 
   beforeAll(async () => {
     mockEventsData = loadEventsData();
-    eventRepo = (await RepositoryFactory.getInstance()).getEventsRepository();
+    eventRepo = (await RepositoryFactory.getInstance()).getEventRepository();
   });
 
   afterAll(() => {});

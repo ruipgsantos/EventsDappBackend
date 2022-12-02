@@ -1,7 +1,7 @@
 import request from "supertest";
-import app from "../../src/app";
+import app from "../../../src/app";
 import { Space } from "@prisma/client";
-import SpaceRepository from "../../src/db/repositories/space.repository";
+import SpaceRepository from "../../../src/db/repositories/space.repository";
 
 //TODO: error scenarios
 describe("Spaces Routes", () => {
@@ -10,6 +10,7 @@ describe("Spaces Routes", () => {
     location: "Mock Street 22",
     name: "Mock Space",
     userId: 2000,
+    active: false,
   };
 
   beforeEach(() => {
@@ -40,6 +41,7 @@ describe("Spaces Routes", () => {
       location: "Mock Street 22",
       name: "Mock Space",
       userId: 2000,
+      active: true,
     };
 
     const updateSpaceSpy = jest

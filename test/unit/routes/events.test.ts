@@ -3,7 +3,7 @@ import app from "../../../src/app";
 import { loadEventsData } from "../../testutils";
 import { Event } from "@prisma/client";
 
-import EventsRepository from "../../../src/db/repositories/events.repository";
+import EventRepository from "../../../src/db/repositories/event.repository";
 
 //TODO: error scenarios
 describe("Events Routes", () => {
