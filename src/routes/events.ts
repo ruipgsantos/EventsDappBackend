@@ -22,7 +22,7 @@ router.get("/", async (req: Request, res: Response) => {
  * Get Events By Space Id
  */
 router.get(
-  "/:spaceId",
+  "/space/:spaceId",
   async (req: Request<{ spaceId: number }>, res: Response<Event[]>) => {
     const eventsRepo = await getEventsRepo();
     const events = await eventsRepo.getEventsBySpaceId(
@@ -32,6 +32,9 @@ router.get(
   }
 );
 
+/**
+ * Save Event
+ */
 router.post("/", async (req: Request<{}, {}, Event>, res: Response) => {
   const eventRepo = await getEventsRepo();
   const resEvent = await eventRepo.saveEvent(req.body);

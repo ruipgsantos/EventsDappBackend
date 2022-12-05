@@ -18,7 +18,7 @@ INSERT INTO public."Space" ("userId","location","name") VALUES
 	 (5,'Avenida dos Combatentes 100 Porto','The House');
 
 
-INSERT INTO public."Event" ("name",description,"date", "location","spaceId") VALUES
+INSERT INTO public."Event" ("name","description","date", "location","spaceId") VALUES
 	 ('It comes!','Another fine edition of "It Comes!". Spooky drinks and the skeleton inside everyone hittin'' bones on the dance floor on the best non-Halloween creepy party of all.', '2022-11-16T21:00:00.000Z', NULL, 1),
 	 ('Cook With Us','Come learn some healthy breakfast recipes with us on a vegan inclusive cooking workshop.', '2022-11-16T11:00:00.000Z',NULL,3),
 	 ('Stone Gate','Stoner Rock mini-festival, bring friends and prepare your necks.', '2022-11-21T22:00:00.000Z','Praca dos Loios Porto',2),

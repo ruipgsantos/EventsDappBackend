@@ -1,8 +1,0 @@
-{
-    "preset": "ts-jest",
-    "displayName": "IntegrationTests",
-    "testMatch": [
-        "<rootDir>/**/*.integration.test.ts"
-    ],
-    "testEnvironment": "<rootDir>/env.integration"
-}

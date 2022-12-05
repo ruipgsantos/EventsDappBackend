@@ -24,7 +24,7 @@ export default class EventRepository extends Repository {
   public async saveEvent(event: Event): Promise<Event> {
     return this.execute<Event>(async () => {
       return await this._prismaClient.event.upsert({
-        where: { id: event.id },
+        where: { id: event.id || -1 },
         update: {
           ...event,
         },

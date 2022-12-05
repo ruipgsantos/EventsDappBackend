@@ -24,7 +24,7 @@ router.get(
 
 /**
  * Save a Space Info
- * A Space can never be created here,
+ * A Space can never be *created* here,
  * it should be created on user onboarding
  */
 router.put("/", async (req: Request<{}, {}, Space>, res: Response<Space>) => {

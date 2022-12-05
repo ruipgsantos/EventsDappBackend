@@ -4,47 +4,49 @@ const path = require("path");
 require("dotenv").config({ path: path.join(__dirname, "integration.env") });
 
 class CustomEnvironment extends NodeEnvironment {
+  _retryLimit = 10;
+  _connectionRetries = 0;
+  _connected = false;
+
   constructor(config) {
     super(config);
   }
 
   async setup() {
-    console.info("Setting up integration tests environment...");
     await super.setup();
+    console.info("Setting up integration tests environment...");
+    console.info(
+      `Current env file: ${path.join(__dirname, "integration.env")}`
+    );
+
     return new Promise((success, reject) => {
       try {
         execSync(
-          "docker-compose -f ./test/integration/docker-compose.yml up -d"
+          "docker-compose -f ./test/integration/docker-compose.yml start"
         );
-        execSync("npx prisma migrate dev --name init");        
         console.info("Containers initialized...");
-        success();
+
+        while (
+          this._connectionRetries <= this._retryLimit &&
+          !this._connected
+        ) {
+          try {
+            execSync("npx prisma migrate dev --name init");
+            this._connected = true;
+            success();
+          } catch (e) {
+            this._connectionRetries++;
+            console.info(
+              `Retrying connection... ${this._connectionRetries} time`
+            );
+          }
+        }
+        reject();
       } catch (err) {
         this.stopContainers();
         reject(err);
       }
     });
-  }
-
-  async teardown() {
-    console.warn("Tearing down test environment...");
-    await super.teardown();
-    return new Promise((success, reject) => {
-      try {
-        this.stopContainers();
-        success();
-      } catch (err) {
-        reject(err);
-      }
-    });
-  }
-
-  stopContainers() {
-    execSync("docker-compose -f ./test/integration/docker-compose.yml down");
-  }
-
-  runScript(script) {
-    return super.runScript(script);
   }
 }
 

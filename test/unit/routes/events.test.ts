@@ -1,6 +1,6 @@
 import request from "supertest";
 import app from "../../../src/app";
-import { loadEventsData } from "../../testutils";
+import { loadEventsData } from "../../test.utils";
 import { Event } from "@prisma/client";
 
 import EventRepository from "../../../src/db/repositories/event.repository";
@@ -48,7 +48,7 @@ describe("Events Routes", () => {
       });
 
     await request(app)
-      .get(`/events/${spaceId}`)
+      .get(`/events/space/${spaceId}`)
       .expect(200)
       .then((response) => expect(response.body).toEqual(expectedResult));
 
