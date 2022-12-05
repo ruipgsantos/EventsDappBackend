@@ -7,6 +7,6 @@ const execSync = ChildProcess.execSync;
 export default async function setup() {
   dotenv.config({ path: path.join(__dirname, "integration.env") });
 
-  execSync("docker-compose -f ./test/integration/docker-compose.yml build");
-  execSync("docker-compose -f ./test/integration/docker-compose.yml create ");
+  execSync("docker-compose -f ./test/integration/docker-compose.yml up -d");  
+  execSync("npx prisma migrate dev --name init");
 }
