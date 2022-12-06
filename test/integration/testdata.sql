@@ -3,8 +3,9 @@ ALTER SEQUENCE "Event_id_seq" RESTART WITH 1;
 ALTER SEQUENCE "Space_id_seq" RESTART WITH 1;
 ALTER SEQUENCE "User_id_seq" RESTART WITH 1;
 
+--User1 private key: 9ecf871857bd4a1b0aa41a7a0880428bb665e6400b45d20846d95906ac98b035
 INSERT INTO public."User" ("name",address) VALUES
-	 ('User1','0xgTUNvOmRdTe8ygguljGokkx85S5rnsnz0ZE1kUEk'),
+	 ('User1','0x9fB48802C9c9A187Df19AF823a792b909bec8576'), 
 	 ('User2','0xhr4afgrxTNpfyhXBKUWVws7nyDqld310tVZH9nm0'),
 	 ('User3','0xWcv0ziOY71THqvyqWCyufFdBWlGx01KWs1wSu90a'),
 	 ('User4','0xyPmfojDANnF7cUIetkil3IHw1OE3gHELvN3kB9K1'),

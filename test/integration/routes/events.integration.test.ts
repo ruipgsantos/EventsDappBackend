@@ -32,6 +32,7 @@ describe("Events Routes", () => {
 
   beforeEach(() => {
     resetDatabaseData();
+    jest.clearAllMocks();
   });
 
   it("Returns All Events", async () => {
