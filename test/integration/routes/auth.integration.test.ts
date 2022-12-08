@@ -91,7 +91,7 @@ describe("Auth Routes", () => {
       .send({ pubkey: mockEthAdress, signedmsg: signedMsg })
       .expect(200)
       .then(async (response) => {
-        expect(response.header["set-cookie"][0]).toContain("connect.sid);
+        expect(response.header["set-cookie"][0]).toContain("connect.sid");
 
         //check returned user
         const newUser: User = response.body;
