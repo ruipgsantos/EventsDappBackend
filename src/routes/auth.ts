@@ -57,7 +57,7 @@ router.post(
       res.status(200).send(user);
     } else {
       //login fail
-      console.error(`could not login...`);
+      console.warn(`could not login...`);
       res.status(401).send();
     }
   }

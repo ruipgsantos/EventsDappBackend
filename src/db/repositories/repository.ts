@@ -17,7 +17,7 @@ export default abstract class Repository {
     try {
       return await queryFunction(this._prismaClient);
     } catch (error) {
-      console.error(error);
+      console.warn(error);
       if (error instanceof Prisma.PrismaClientKnownRequestError) {
         if (error.code === "P2025") {
           //not found

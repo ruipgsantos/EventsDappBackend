@@ -1,14 +1,15 @@
-import express, { NextFunction, Request, Response } from "express";
+import express from "express";
 import "express-async-errors";
 import cors from "cors";
 import { UserRouter, AuthRouter, EventsRouter, SpacesRouter } from "./routes";
 import session from "express-session";
 import { v4 as uuidv4 } from "uuid";
 import cookieParser from "cookie-parser";
+import morgan from "morgan";
 import { ErrorMiddleware } from "./middleware";
 
 const app = express();
-
+app.use(morgan('combined'));
 app.use(
   cors({
     origin: "http://localhost:3000",

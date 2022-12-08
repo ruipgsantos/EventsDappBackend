@@ -10,7 +10,7 @@ const error = (err: Error, req: Request, res: Response, next: NextFunction) => {
       res.status(500).send("Error");
     }
 
-    console.error(`An error has ocurred: ${console.error(err.message)}`);
+    console.warn(`An error has ocurred: ${err.message}`);
   } else {
     next();
   }
