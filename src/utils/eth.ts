@@ -34,7 +34,7 @@ export const authenticateWalletUser = (
 
     return recoveredAdress.toUpperCase() === publicKey.toUpperCase();
   } catch (err) {
-    console.error(err);
+    console.warn(err);
     return false;
   }
 };
