@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import { CacheProvider, CacheType } from "../../src/cache/cache.provider";
+import { CacheProvider, CacheType } from "../cache/cache.provider";
 import { v4 as uuidv4 } from "uuid";
 import { authenticateWalletUser } from "../utils/eth";
 import UserRepository from "../db/repositories/user.repository";
@@ -26,7 +26,7 @@ router.get(
   (req: Request<{ pubkey: string }>, res: Response<{ nonce: string }>) => {
     const nonce = uuidv4();
     addressCache.set(req.params.pubkey, nonce);
-    res.send({ nonce });
+    res.json({ nonce });
   }
 );
 
@@ -44,17 +44,12 @@ router.post(
     const userIsAuthd = authenticateWalletUser(pubkey, signedMsg, nonce);
 
     if (userIsAuthd) {
-      // res.cookie("isAuthenticated", true, {
-      //   maxAge: req.session.cookie.maxAge,
-      //   httpOnly: false,
-      // });
-
       const user = await (await getUserRepo()).getOrCreateUser(pubkey);
 
       req.session.isAuthenticated = true;
       req.session.userId = user.id;
 
-      res.status(200).send(user);
+      res.status(200).json(user);
     } else {
       //login fail
       console.warn(`could not login...`);

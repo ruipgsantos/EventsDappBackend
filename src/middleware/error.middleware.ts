@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import GenericError from "../../src/error/generic.error";
+import GenericError from "../error/generic.error";
 
 const error = (err: Error, req: Request, res: Response, next: NextFunction) => {
   if (err) {
