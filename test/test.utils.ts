@@ -1,9 +1,14 @@
 import * as fs from "fs";
 import path from "path";
-import { Event } from "@prisma/client";
-import net from "net";
 
-export const loadEventsData = (): Event[] => {
-  const rawdata = fs.readFileSync(path.resolve(__dirname, "./testdata.json"));
-  return JSON.parse(rawdata.toString());
+const getRawTestData = (filename: string) => {
+  return fs.readFileSync(path.resolve(__dirname, `./${filename}`));
+};
+
+export const loadEventsData = (): any[] => {
+  return JSON.parse(getRawTestData("event-test-data.json").toString());
+};
+
+export const loadSpacesData = (): any[] => {
+  return JSON.parse(getRawTestData("space-test-data.json").toString());
 };

@@ -22,7 +22,7 @@ describe("Auth Routes", () => {
 
   beforeEach(() => {});
 
-  it("Should return nonce for signature challenge", async () => {
+  it("Returns nonce for signature challenge", async () => {
     await request(app)
       .get(`/auth/nonce/${mockEthAdress}`)
       .expect(200)
@@ -32,7 +32,7 @@ describe("Auth Routes", () => {
       });
   });
 
-  it("Should return user and authentication cookie after challenge", async () => {
+  it("Returns user and authentication cookie after challenge", async () => {
     const nonce = uuidv4();
     CacheProvider.getCache(CacheType.AddressCache).set(mockEthAdress, nonce);
 
@@ -70,7 +70,7 @@ describe("Auth Routes", () => {
       .expect(200)
       .then((response) => {
         expect(response.header["set-cookie"][0]).toContain(
-          "isAuthenticated=true;"
+          "connect.sid="
         );
 
         expect(response.body).toEqual(user);
@@ -79,7 +79,7 @@ describe("Auth Routes", () => {
     expect(getOrCreateUserSpy).toBeCalledTimes(1);
   });
 
-  it("Should return 401 for failed authentication", async () => {
+  it("Returns 401 for failed authentication", async () => {
     const nonce = uuidv4();
     CacheProvider.getCache(CacheType.AddressCache).set(mockEthAdress, nonce);
 

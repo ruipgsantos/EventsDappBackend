@@ -1,0 +1,37 @@
+[
+    {
+        "id": 3,
+        "userId": 3,
+        "location": "Rua Fernandes de Freitas 521 Porto",
+        "name": "Fried Eggs",
+        "active": false
+    },
+    {
+        "id": 1,
+        "userId": 1,
+        "location": "Rua Martires da Liberdade 25 Porto",
+        "name": "Martyr",
+        "active": false
+    },
+    {
+        "id": 2,
+        "userId": 2,
+        "location": "Rua do Sol 110 Porto",
+        "name": "SunO Hum",
+        "active": false
+    },
+    {
+        "id": 5,
+        "userId": 5,
+        "location": "Avenida dos Combatentes 100 Porto",
+        "name": "The House",
+        "active": false
+    },
+    {
+        "id": 4,
+        "userId": 4,
+        "location": "Avenida dos Aliados 67 Porto",
+        "name": "The Locust",
+        "active": false
+    }
+]

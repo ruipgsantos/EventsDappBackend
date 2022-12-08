@@ -45,4 +45,24 @@ export default class UserRepository extends Repository {
       });
     });
   }
+
+  public async getBySpace(spaceId: number): Promise<User> {
+    return this.execute<User>(async () => {
+      return this._prismaClient.user.findFirst({
+        where: { Space: { some: { id: spaceId } } },
+      });
+    });
+  }
+
+  public async getByEvent(eventId: number): Promise<User> {
+    return this.execute<User>(async () => {
+      return this._prismaClient.user.findFirst({
+        include: {
+          Space: {
+            include: { events: { where: { id: eventId } } },
+          },
+        },
+      });
+    });
+  }
 }

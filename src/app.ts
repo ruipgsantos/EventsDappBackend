@@ -1,11 +1,12 @@
-import express from "express";
+import express, { NextFunction, Request, Response } from "express";
+import "express-async-errors";
 import cors from "cors";
-import eventsRouter from "./routes/events";
-import spacesRouter from "./routes/spaces";
-import authRouter from "./routes/auth";
+import { UserRouter, AuthRouter, EventsRouter, SpacesRouter } from "./routes";
 import session from "express-session";
 import { v4 as uuidv4 } from "uuid";
 import cookieParser from "cookie-parser";
+import { ErrorMiddleware } from "./middleware";
+
 const app = express();
 
 app.use(
@@ -35,8 +36,11 @@ app.use(
 
 app.use(express.json());
 
-app.use("/events", eventsRouter);
-app.use("/spaces", spacesRouter);
-app.use("/auth", authRouter);
+app.use("/events", EventsRouter);
+app.use("/spaces", SpacesRouter);
+app.use("/auth", AuthRouter);
+app.use("/user", UserRouter);
+
+app.use(ErrorMiddleware);
 
 export default app;

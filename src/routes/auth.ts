@@ -9,6 +9,7 @@ import { User } from "@prisma/client";
 declare module "express-session" {
   export interface SessionData {
     isAuthenticated: boolean;
+    userId: number;
   }
 }
 
@@ -41,15 +42,17 @@ router.post(
 
     //authenticate user through his wallet address
     const userIsAuthd = authenticateWalletUser(pubkey, signedMsg, nonce);
-    // const userIsAuthd = true;
 
     if (userIsAuthd) {
-      res.cookie("isAuthenticated", true, {
-        maxAge: req.session.cookie.maxAge,
-        httpOnly: false,
-      });
+      // res.cookie("isAuthenticated", true, {
+      //   maxAge: req.session.cookie.maxAge,
+      //   httpOnly: false,
+      // });
 
       const user = await (await getUserRepo()).getOrCreateUser(pubkey);
+
+      req.session.isAuthenticated = true;
+      req.session.userId = user.id;
 
       res.status(200).send(user);
     } else {

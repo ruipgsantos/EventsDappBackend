@@ -1,7 +1,17 @@
-import { Space } from "@prisma/client";
+import { User, Space } from "@prisma/client";
 import Repository from "./repository";
 
 export default class SpaceRepository extends Repository {
+  public async getSpaces(): Promise<Space[]> {
+    return this.execute<Space[]>(async () => {
+      return await this._prismaClient.space.findMany({
+        orderBy: {
+          name: "asc",
+        },
+      });
+    });
+  }
+
   public async getSpaceById(id: number): Promise<Space> {
     return this.execute<Space>(async () => {
       return await this._prismaClient.space.findUnique({

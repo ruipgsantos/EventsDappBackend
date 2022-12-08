@@ -10,14 +10,10 @@ import {
 import UserRepository from "../../../src/db/repositories/user.repository";
 import { PrismaClient } from "@prisma/client";
 import Repository from "../../../src/db/repositories/repository";
-import { resetDatabaseData } from "../int.test.utils";
+import { resetDatabaseData, mockData } from "../int.test.utils";
 
-const mockEthAdress = "0x62F87Ba3C0D00d1a6F0533d0309DB3720FF8AfFf";
-const mockPrivateKey =
-  "33310aabe472ccefd40a228ae0048b0bff11d10402f20397afac2908f69652e9";
-const user1Address = "0x9fB48802C9c9A187Df19AF823a792b909bec8576";
-const user1PrivateKey =
-  "9ecf871857bd4a1b0aa41a7a0880428bb665e6400b45d20846d95906ac98b035";
+const { mockEthAdress, mockPrivateKey, user1Address, user1PrivateKey } =
+  mockData;
 
 jest.setTimeout(1000000);
 
@@ -95,9 +91,7 @@ describe("Auth Routes", () => {
       .send({ pubkey: mockEthAdress, signedmsg: signedMsg })
       .expect(200)
       .then(async (response) => {
-        expect(response.header["set-cookie"][0]).toContain(
-          "isAuthenticated=true;"
-        );
+        expect(response.header["set-cookie"][0]).toContain("connect.sid);
 
         //check returned user
         const newUser: User = response.body;
@@ -159,9 +153,7 @@ describe("Auth Routes", () => {
       .send({ pubkey: existingUser1?.address, signedmsg: signedMsg })
       .expect(200)
       .then(async (response) => {
-        expect(response.header["set-cookie"][0]).toContain(
-          "isAuthenticated=true;"
-        );
+        expect(response.header["set-cookie"][0]).toContain("connect.sid=");
 
         //check returned user
         const resUser: User = response.body;
