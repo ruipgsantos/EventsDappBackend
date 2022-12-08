@@ -8,6 +8,8 @@ import {
 import { Response } from "express";
 import { v4 as uuidv4 } from "uuid";
 import { CacheProvider, CacheType } from "../../../src/cache/cache.provider";
+import { User } from "@prisma/client";
+import UserRepository from "../../../src/db/repositories/user.repository";
 
 const mockEthAdress = "0x62F87Ba3C0D00d1a6F0533d0309DB3720FF8AfFf";
 const mockPubKey =
@@ -20,7 +22,7 @@ describe("Auth Routes", () => {
 
   beforeEach(() => {});
 
-  it("Should return nonce for signature challenge", async () => {
+  it("Returns nonce for signature challenge", async () => {
     await request(app)
       .get(`/auth/nonce/${mockEthAdress}`)
       .expect(200)
@@ -30,7 +32,7 @@ describe("Auth Routes", () => {
       });
   });
 
-  it("Should return authentication cookie after challenge", async () => {
+  it("Returns user and authentication cookie after challenge", async () => {
     const nonce = uuidv4();
     CacheProvider.getCache(CacheType.AddressCache).set(mockEthAdress, nonce);
 
@@ -48,18 +50,36 @@ describe("Auth Routes", () => {
       version: SignTypedDataVersion.V1,
     });
 
+    const user = {
+      id: 1,
+      address: mockEthAdress,
+      name: "user1",
+    };
+
+    const getOrCreateUserSpy = jest
+      .spyOn(UserRepository.prototype, "getOrCreateUser")
+      .mockImplementation((): Promise<User> => {
+        return new Promise<User>((res) => {
+          return res(user);
+        });
+      });
+
     await request(app)
       .post(`/auth/login`)
       .send({ pubkey: mockEthAdress, signedmsg: signedMsg })
       .expect(200)
       .then((response) => {
         expect(response.header["set-cookie"][0]).toContain(
-          "isAuthenticated=true;"
+          "connect.sid="
         );
+
+        expect(response.body).toEqual(user);
       });
+
+    expect(getOrCreateUserSpy).toBeCalledTimes(1);
   });
 
-  it("Should return 401 for failed authentication", async () => {
+  it("Returns 401 for failed authentication", async () => {
     const nonce = uuidv4();
     CacheProvider.getCache(CacheType.AddressCache).set(mockEthAdress, nonce);
 

@@ -1,10 +1,12 @@
-import express from "express";
+import express, { NextFunction, Request, Response } from "express";
+import "express-async-errors";
 import cors from "cors";
-import eventsRouter from "./routes/events";
-import authRouter from "./routes/auth";
+import { UserRouter, AuthRouter, EventsRouter, SpacesRouter } from "./routes";
 import session from "express-session";
 import { v4 as uuidv4 } from "uuid";
 import cookieParser from "cookie-parser";
+import { ErrorMiddleware } from "./middleware";
+
 const app = express();
 
 app.use(
@@ -27,14 +29,18 @@ app.use(
     saveUninitialized: true,
     cookie: {
       secure: false,
-      maxAge: 1000 * 60 * 60,      
+      maxAge: 1000 * 60 * 60,
     },
   })
 );
 
 app.use(express.json());
 
-app.use("/events", eventsRouter);
-app.use("/auth", authRouter);
+app.use("/events", EventsRouter);
+app.use("/spaces", SpacesRouter);
+app.use("/auth", AuthRouter);
+app.use("/user", UserRouter);
+
+app.use(ErrorMiddleware);
 
 export default app;

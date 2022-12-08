@@ -3,8 +3,9 @@ ALTER SEQUENCE "Event_id_seq" RESTART WITH 1;
 ALTER SEQUENCE "Space_id_seq" RESTART WITH 1;
 ALTER SEQUENCE "User_id_seq" RESTART WITH 1;
 
+--User1 private key: 9ecf871857bd4a1b0aa41a7a0880428bb665e6400b45d20846d95906ac98b035
 INSERT INTO public."User" ("name",address) VALUES
-	 ('User1','0xgTUNvOmRdTe8ygguljGokkx85S5rnsnz0ZE1kUEk'),
+	 ('User1','0x9fB48802C9c9A187Df19AF823a792b909bec8576'), 
 	 ('User2','0xhr4afgrxTNpfyhXBKUWVws7nyDqld310tVZH9nm0'),
 	 ('User3','0xWcv0ziOY71THqvyqWCyufFdBWlGx01KWs1wSu90a'),
 	 ('User4','0xyPmfojDANnF7cUIetkil3IHw1OE3gHELvN3kB9K1'),
@@ -18,7 +19,7 @@ INSERT INTO public."Space" ("userId","location","name") VALUES
 	 (5,'Avenida dos Combatentes 100 Porto','The House');
 
 
-INSERT INTO public."Event" ("name",description,"date", "location","spaceId") VALUES
+INSERT INTO public."Event" ("name","description","date", "location","spaceId") VALUES
 	 ('It comes!','Another fine edition of "It Comes!". Spooky drinks and the skeleton inside everyone hittin'' bones on the dance floor on the best non-Halloween creepy party of all.', '2022-11-16T21:00:00.000Z', NULL, 1),
 	 ('Cook With Us','Come learn some healthy breakfast recipes with us on a vegan inclusive cooking workshop.', '2022-11-16T11:00:00.000Z',NULL,3),
 	 ('Stone Gate','Stoner Rock mini-festival, bring friends and prepare your necks.', '2022-11-21T22:00:00.000Z','Praca dos Loios Porto',2),
