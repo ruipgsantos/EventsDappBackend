@@ -1,6 +1,6 @@
 import { Prisma, PrismaClient } from "@prisma/client";
 import { NotFoundError } from "@prisma/client/runtime";
-import RecordNotFound from "../../../src/error/recordnotfound.error";
+import RecordNotFound from "../../error/recordnotfound.error";
 
 type QueryFunction<ReturnType> = (prisma: PrismaClient) => Promise<ReturnType>;
 

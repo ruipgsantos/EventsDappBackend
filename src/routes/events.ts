@@ -15,8 +15,7 @@ const getEventsRepo = async (): Promise<EventRepository> => {
  */
 router.get("/", async (req: Request, res: Response) => {
   const eventsRepo = await getEventsRepo();
-  const events = await eventsRepo.getEvents();  
-  res.send(events);
+  res.json(await eventsRepo.getEvents());
 });
 
 /**
@@ -29,7 +28,7 @@ router.get(
     const events = await eventsRepo.getEventsBySpaceId(
       Number(req.params.spaceId)
     );
-    res.send(events);
+    res.json(events);
   }
 );
 
@@ -42,9 +41,7 @@ router.post(
   IsEventSpaceOwnerMiddleware,
   async (req: Request<{}, {}, Event>, res: Response) => {
     const eventRepo = await getEventsRepo();
-    const resEvent = await eventRepo.saveEvent(req.body);
-
-    res.send(resEvent);
+    res.json(await eventRepo.saveEvent(req.body));
   }
 );
 

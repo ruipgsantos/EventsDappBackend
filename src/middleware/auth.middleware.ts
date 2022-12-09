@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import UnauthorizedError from "../../src/error/unauthorized.error";
+import UnauthorizedError from "../error/unauthorized.error";
 
 const auth = (req: Request, res: Response, next: NextFunction) => {
   if (!req.session.isAuthenticated) {

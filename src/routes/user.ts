@@ -17,7 +17,7 @@ router.put(
   async (req: Request<{}, {}, User>, res: Response) => {
     const userRepo = await getUserRepo();
     const updatedSpace = await userRepo.updateUser(req.body);
-    res.send(updatedSpace);
+    res.json(updatedSpace);
   }
 );
 
