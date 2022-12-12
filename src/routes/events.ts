@@ -15,7 +15,7 @@ const getEventsRepo = async (): Promise<EventRepository> => {
  * Get All Events
  */
 router.get("/", async (req: Request, res: Response) => {
-  const eventsRepo = await getEventsRepo();  
+  const eventsRepo = await getEventsRepo();
   res.json(await eventsRepo.getEvents());
 });
 

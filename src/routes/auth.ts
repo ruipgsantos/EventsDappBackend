@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import { CacheProvider, CacheType } from "../../src/cache/cache.provider";
+import { CacheProvider, CacheType } from "../cache/cache.provider";
 import { v4 as uuidv4 } from "uuid";
 import { authenticateWalletUser } from "../utils/eth";
 import UserRepository from "../db/repositories/user.repository";
@@ -44,11 +44,6 @@ router.post(
     const userIsAuthd = authenticateWalletUser(pubkey, signedMsg, nonce);
 
     if (userIsAuthd) {
-      // res.cookie("isAuthenticated", true, {
-      //   maxAge: req.session.cookie.maxAge,
-      //   httpOnly: false,
-      // });
-
       const user = await (await getUserRepo()).getOrCreateUser(pubkey);
 
       req.session.isAuthenticated = true;
