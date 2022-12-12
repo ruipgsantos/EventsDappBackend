@@ -15,9 +15,8 @@ router.put(
   AuthMiddleware,
   IsUserOwnerMiddleware,
   async (req: Request<{}, {}, User>, res: Response) => {
-    const userRepo = await getUserRepo();
-    const updatedSpace = await userRepo.updateUser(req.body);
-    res.send(updatedSpace);
+    const userRepo = await getUserRepo();    
+    res.json(await userRepo.updateUser(req.body));
   }
 );
 

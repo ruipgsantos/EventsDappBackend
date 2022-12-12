@@ -18,7 +18,7 @@ router.get(
   "/",
   async (req: Request<{ spaceid: number }>, res: Response<Space[]>) => {
     const spaceRepo = await getSpaceRepo();
-    res.send(await spaceRepo.getSpaces());
+    res.json(await spaceRepo.getSpaces());
   }
 );
 
@@ -30,7 +30,7 @@ router.get(
   async (req: Request<{ spaceid: number }>, res: Response<Space>) => {
     const spaceRepo = await getSpaceRepo();
     const space = await spaceRepo.getSpaceById(Number(req.params.spaceid));
-    res.send(space);
+    res.json(space);
   }
 );
 
@@ -46,7 +46,7 @@ router.put(
   async (req: Request<{}, {}, Space>, res: Response<Space>) => {
     const spaceRepo = await getSpaceRepo();
     const updatedSpace = await spaceRepo.updateSpace(req.body);
-    res.send(updatedSpace);
+    res.json(updatedSpace);
   }
 );
 

@@ -4,6 +4,7 @@ import RepositoryFactory from "../db/repository.factory";
 import { Event } from "@prisma/client";
 import { AuthMiddleware } from "../middleware";
 import IsEventSpaceOwnerMiddleware from "../middleware/ownership/eventowner.middleware";
+
 const router = express.Router();
 
 const getEventsRepo = async (): Promise<EventRepository> => {
@@ -14,9 +15,8 @@ const getEventsRepo = async (): Promise<EventRepository> => {
  * Get All Events
  */
 router.get("/", async (req: Request, res: Response) => {
-  const eventsRepo = await getEventsRepo();
-  const events = await eventsRepo.getEvents();  
-  res.send(events);
+  const eventsRepo = await getEventsRepo();  
+  res.json(await eventsRepo.getEvents());
 });
 
 /**
@@ -29,7 +29,7 @@ router.get(
     const events = await eventsRepo.getEventsBySpaceId(
       Number(req.params.spaceId)
     );
-    res.send(events);
+    res.json(events);
   }
 );
 
@@ -44,7 +44,7 @@ router.post(
     const eventRepo = await getEventsRepo();
     const resEvent = await eventRepo.saveEvent(req.body);
 
-    res.send(resEvent);
+    res.json(resEvent);
   }
 );
 

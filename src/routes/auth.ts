@@ -26,7 +26,7 @@ router.get(
   (req: Request<{ pubkey: string }>, res: Response<{ nonce: string }>) => {
     const nonce = uuidv4();
     addressCache.set(req.params.pubkey, nonce);
-    res.send({ nonce });
+    res.json({ nonce });
   }
 );
 
@@ -54,7 +54,7 @@ router.post(
       req.session.isAuthenticated = true;
       req.session.userId = user.id;
 
-      res.status(200).send(user);
+      res.status(200).json(user);
     } else {
       //login fail
       console.warn(`could not login...`);

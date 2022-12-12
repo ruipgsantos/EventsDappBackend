@@ -1,0 +1,37 @@
+{
+    "language_tabs": [
+        {
+            "javascript": "JavaScript"
+        },
+        {
+            "javascript--node": "Node.JS"
+        }
+    ],
+    "verbose": true,
+    "tagGroups": [
+        {
+            "title": "Events",
+            "tags": [
+                "events"
+            ]
+        },
+        {
+            "title": "Spaces",
+            "tags": [
+                "spaces"
+            ]
+        },
+        {
+            "title": "User",
+            "tags": [
+                "user"
+            ]
+        },
+        {
+            "title": "Auth",
+            "tags": [
+                "auth"
+            ]
+        }
+    ]
+}

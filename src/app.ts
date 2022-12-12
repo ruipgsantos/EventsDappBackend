@@ -9,10 +9,10 @@ import morgan from "morgan";
 import { ErrorMiddleware } from "./middleware";
 
 const app = express();
-app.use(morgan('combined'));
+app.use(morgan("combined"));
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "http://localhost",
     methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD"],
     credentials: true,
   })
