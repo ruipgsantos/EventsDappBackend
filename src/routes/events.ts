@@ -42,9 +42,7 @@ router.post(
   IsEventSpaceOwnerMiddleware,
   async (req: Request<{}, {}, Event>, res: Response) => {
     const eventRepo = await getEventsRepo();
-    const resEvent = await eventRepo.saveEvent(req.body);
-
-    res.json(resEvent);
+    res.json(await eventRepo.saveEvent(req.body));
   }
 );
 
