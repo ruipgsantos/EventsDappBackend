@@ -4,6 +4,7 @@ import RepositoryFactory from "../db/repository.factory";
 import { Event } from "@prisma/client";
 import { AuthMiddleware } from "../middleware";
 import IsEventSpaceOwnerMiddleware from "../middleware/ownership/eventowner.middleware";
+
 const router = express.Router();
 
 const getEventsRepo = async (): Promise<EventRepository> => {
