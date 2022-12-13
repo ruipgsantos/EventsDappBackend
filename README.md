@@ -1,8 +1,20 @@
 <!-- Generator: Widdershins v4.0.1 -->
 
 <h1 id="events-dapp">Events Dapp v1.0.0</h1>
+<h2>An Event Management Dapp with Metamask Login</h2>
 
-An Event Management Dapp with Metamask Login Support ONLY
+![Build and Test](https://github.com/ruipgsantos/events_be/actions/workflows/build-and-test.js.yml/badge.svg)
+
+ ![](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white) ![](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge) ![](https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white) ![](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white) ![](https://img.shields.io/badge/Jest-323330?style=for-the-badge&logo=Jest&logoColor=white) 
+
+<h2>Quick Start</h2>
+
+To deploy locally with mock data:
+> docker-compose up
+
+To run dev:
+> npm run dev:all
+
 
 # Authentication
 
