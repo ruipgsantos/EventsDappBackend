@@ -1,6 +1,6 @@
 services:
   db:
-    container_name: eventdapp_db    
+    container_name: eventdapp_db
     image: "bitnami/postgresql"
     environment:
       - PSQL_USER=postgres
@@ -8,7 +8,8 @@ services:
       - POSTGRES_PASSWORD=postgres
     tty: true
   server:
-
+    depends_on:
+      - db
     image: eventdapp/server
     environment:
       - DB_HOST_NAME=eventdapp_db
