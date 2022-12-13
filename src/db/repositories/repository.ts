@@ -23,10 +23,8 @@ export default abstract class Repository {
           //not found
           throw new RecordNotFound();
         }
-      } else {
-        throw error;
       }
-      await this._prismaClient.$disconnect();
+      throw error;
     } finally {
       await this._prismaClient.$disconnect();
     }

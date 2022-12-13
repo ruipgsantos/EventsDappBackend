@@ -1,0 +1,10 @@
+services:
+  local-db:
+    image: "bitnami/postgresql"
+    environment:
+      - PSQL_USER=postgres
+      - PSQL_PASSWORD=postgres
+      - POSTGRES_PASSWORD=postgres
+    tty: true
+    ports:
+      - 5432:5432

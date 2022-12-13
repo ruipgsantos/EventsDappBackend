@@ -14,7 +14,6 @@ import {
   mockData,
 } from "../int.test.utils";
 
-jest.setTimeout(100000);
 describe("Events Routes", () => {
   let mockEventsData: any[] = loadEventsData();
   let eventRepo: EventRepository;

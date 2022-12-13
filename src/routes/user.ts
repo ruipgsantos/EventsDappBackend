@@ -10,6 +10,9 @@ const getUserRepo = async (): Promise<UserRepository> => {
   return (await RepositoryFactory.getInstance()).getUserRepository();
 };
 
+/**
+ * Update User info
+ */
 router.put(
   "/",
   AuthMiddleware,

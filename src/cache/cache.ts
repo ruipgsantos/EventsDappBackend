@@ -1,5 +1,8 @@
 import { Type } from "typescript";
 
+/**
+ * Memory Cache Super Class for simple Key-Value pairs
+ */
 export default class Cache<K, V> {
   protected _storage: Map<K, V>;
 

@@ -15,7 +15,6 @@ import {
   mockData,
 } from "../int.test.utils";
 
-jest.setTimeout(100000);
 describe("Space Routes", () => {
   let mockSpacesData: any[] = loadSpacesData();
   let spaceRepo: SpaceRepository;

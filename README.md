@@ -1,16 +1,3 @@
----
-title: Events Dapp v1.0.0
-language_tabs:
-  - javascript: JavaScript
-  - javascript--node: Node.JS
-toc_footers: []
-includes: []
-search: true
-highlight_theme: darkula
-headingLevel: 2
-
----
-
 <!-- Generator: Widdershins v4.0.1 -->
 
 <h1 id="events-dapp">Events Dapp v1.0.0</h1>
@@ -19,7 +6,10 @@ An Event Management Dapp with Metamask Login Support ONLY
 
 # Authentication
 
-* API Key (cookieAuth)
+Authentication can be performed through a challenge-response flow.
+  - Request *nonce*: [Get Nonce](#get__auth_nonce_pubkey)
+  - Sign nonce message with Metamask [SignTypeDataV1](https://docs.metamask.io/guide/signing-data.html#sign-typed-data-v1) and request login: [Request Login](#post__auth_login)
+* Session will be maintained after login (cookieAuth)
     - Parameter Name: **connect.sid**, in: cookie. 
 
 <h1 id="events-dapp-events">Events</h1>
