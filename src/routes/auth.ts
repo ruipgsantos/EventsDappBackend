@@ -46,6 +46,7 @@ router.post(
     if (userIsAuthd) {
       const user = await (await getUserRepo()).getOrCreateUser(pubkey);
 
+      //set session after successful login
       req.session.isAuthenticated = true;
       req.session.userId = user.id;
 

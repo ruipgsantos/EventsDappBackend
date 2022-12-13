@@ -3,6 +3,9 @@ import EventRepository from "./repositories/event.repository";
 import SpaceRepository from "./repositories/space.repository";
 import UserRepository from "./repositories/user.repository";
 
+/**
+ * Repository Factor. Will return ready to connect singleton instances of each repository.
+ */
 export default class RepositoryFactory {
   private _prismaClient: PrismaClient;
   private static _instance: RepositoryFactory;

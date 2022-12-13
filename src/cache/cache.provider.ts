@@ -1,10 +1,16 @@
 import Cache from "./cache";
 
+/**
+ * Supported Cache Types
+ */
 enum CacheType {
   AddressCache,
   TokenCache,
 }
 
+/**
+ * Cache Provider. Will return singleton instances of a cache when needed
+ */
 class CacheProvider {
   private static _cacheList: Map<CacheType, Cache<any, any>> = new Map();
 

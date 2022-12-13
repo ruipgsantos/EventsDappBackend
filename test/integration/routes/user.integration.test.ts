@@ -8,8 +8,6 @@ import { authenticateUser } from "../int.test.utils";
 
 const { user1Address, user1PrivateKey } = mockData;
 
-jest.setTimeout(1000000);
-
 describe("User Routes", () => {
   class GenericRepo extends Repository {
     public async getUserByAddress(address: string): Promise<User | null> {

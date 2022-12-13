@@ -15,7 +15,6 @@ import { resetDatabaseData, mockData } from "../int.test.utils";
 const { mockEthAdress, mockPrivateKey, user1Address, user1PrivateKey } =
   mockData;
 
-jest.setTimeout(1000000);
 
 describe("Auth Routes", () => {
   class GenericRepo extends Repository {

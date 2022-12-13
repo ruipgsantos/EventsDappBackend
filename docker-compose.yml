@@ -1,9 +1,21 @@
 services:
   db:
+    container_name: eventdapp_db    
     image: "bitnami/postgresql"
-    tty: true
     environment:
-      POSTGRES_PASSWORD: postgres
+      - PSQL_USER=postgres
+      - PSQL_PASSWORD=postgres
+      - POSTGRES_PASSWORD=postgres
+    tty: true
+  server:
 
+    image: eventdapp/server
+    environment:
+      - DB_HOST_NAME=eventdapp_db
+      - DATABASE_URL=postgresql://postgres:postgres@eventdapp_db:5432/postgres
+      - COOKIE_SECRET="b6fe3b29-afb9-46c2-9983-385786e064b6"
+      - PORT="5000"
     ports:
-      - "127.0.0.1:5432:5432"
+      - 5000:5000
+    build:
+      dockerfile: ./server.Dockerfile
