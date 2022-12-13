@@ -25,4 +25,4 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - name: Try Deploy
-      run: docker compose -f docker-compose.yml up
+      run: docker compose -f docker-compose.yml up -d
