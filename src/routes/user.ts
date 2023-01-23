@@ -18,8 +18,20 @@ router.put(
   AuthMiddleware,
   IsUserOwnerMiddleware,
   async (req: Request<{}, {}, User>, res: Response) => {
-    const userRepo = await getUserRepo();    
+    const userRepo = await getUserRepo();
     res.json(await userRepo.updateUser(req.body));
+  }
+);
+
+/**
+ * Get User info
+ */
+router.get(
+  "/:address",
+  AuthMiddleware,  
+  async (req: Request<{ address: string }, {}, User>, res: Response) => {
+    const userRepo = await getUserRepo();
+    res.json(await userRepo.getUser(req.params.address));
   }
 );
 

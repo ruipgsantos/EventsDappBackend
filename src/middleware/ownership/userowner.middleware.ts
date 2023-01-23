@@ -10,6 +10,7 @@ export default async function IsUserOwnerMiddleware(
   const userId = req.session.userId;
   const newUserInfo: User = req.body;
 
+  console.log(`${userId}: ${newUserInfo}`);
   if (userId !== newUserInfo.id) {
     throw new ForbiddenError();
   }

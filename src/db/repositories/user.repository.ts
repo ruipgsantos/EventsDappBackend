@@ -25,6 +25,7 @@ export default class UserRepository extends Repository {
     return this.execute<User>(async () => {
       return this._prismaClient.user.findUnique({
         where: { address },
+        include: { Space: true },
       });
     });
   }

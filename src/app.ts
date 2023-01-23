@@ -12,7 +12,7 @@ const app = express();
 app.use(morgan("combined"));
 app.use(
   cors({
-    origin: "http://localhost",
+    origin: /^(http|https):\/\/localhost:\d{4}/,
     methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD"],
     credentials: true,
   })

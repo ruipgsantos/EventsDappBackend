@@ -33,6 +33,26 @@ describe("User Routes", () => {
     );
   });
 
+  it("Gets user info", async () => {
+    const getUserSpy = jest
+      .spyOn(UserRepository.prototype, "getUser")
+      .mockImplementation((address: string): Promise<User> => {
+        return new Promise<User>((res) => {
+          return res(mockNewUser);
+        });
+      });
+
+    await request(app)
+      .get(`/user/${mockNewUser.address}`)
+      .send(mockNewUser)
+      .expect(200)
+      .then((response) => {
+        expect(response.body).toEqual(mockNewUser);
+      });
+
+    expect(getUserSpy).toHaveBeenCalledTimes(1);
+  });
+
   it("Updates user info", async () => {
     const updateUserSpy = jest
       .spyOn(UserRepository.prototype, "updateUser")
